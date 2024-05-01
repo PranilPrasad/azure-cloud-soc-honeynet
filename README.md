@@ -1,5 +1,5 @@
 # Azure Honeynet: Simulating Real-World Cyber Attacks
-![Cloud Honeynet / SOC](https://i.imgur.com/4qcVKgw.png)
+![Sa18KAF - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/d0e0b178-c99c-4ae4-aea1-cef47d22cf26)
 
 ## Introduction
 
@@ -39,14 +39,14 @@ The main objective of this project was to [set up virtual machines that were int
 
 
 ## Architecture Prior to Implementing Hardening Measures and Security Controls
-![Architecture Diagram](https://i.imgur.com/1tLjWY9.png)
+![TFv2e8F - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/cebd8473-3ee8-4e88-90c0-996ff8626b7c)
 
 <b>Before Hardening Measures and Security Controls:</b>
 
 - In the "BEFORE" stage of the project, all resources were initially deployed with public exposure to the internet. This setup was intentionally insecure to attract potential cyber attackers and observe their tactics. The Virtual Machines had both their Network Security Groups (NSGs) and built-in firewalls wide open, allowing unrestricted access from any source. Additionally, all other resources, such as storage accounts and databases, were deployed with public endpoints visible to the internet, without utilizing any Private Endpoints for added security.
 
 ## Architecture After Implementing Hardening Measures and Security Controls
-![Architecture Diagram](https://i.imgur.com/ch1cAMU.png)
+![2OpO4dC - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/91fe191f-e9f2-4047-a002-57cb07111a77)
  <b>For the "AFTER" stage, I implemented a series of hardening measures and security controls to improve the environment's overall security posture. These improvements included:</b>
 
 - <b>Network Security Groups (NSGs)</b>: I hardened the NSGs by blocking all inbound and outbound traffic, with the sole exception of my own public IP address. This ensured that only authorized traffic from a trusted source was allowed to access the virtual machines.
@@ -70,22 +70,21 @@ enabling the creation of visualizations that effectively illustrated the cyber t
  
 - <b>This attack map demonstrates the consequences of leaving the Network Security Group (NSG) open, as it allowed for malicious traffic to flow unimpeded. This visualization underscores the importance of implementing proper security measures, such as restricting NSG rules, to prevent unauthorized access and minimize potential threats.</b>
 
-
-![NSG Allowed Inbound Malicious Flows](https://i.imgur.com/JeElX9R.png)<br>
+![nsg-malicious-allowed-in](https://github.com/cesarias/Secure_Cloud/assets/126536570/d6695c8e-b06b-4a92-a56c-a3d7a13a7adf)
 
  <br />
  <br />
  
  - <b>This attack map highlights the numerous syslog authentication failures experienced by the Linux server I deployed, indicating that unauthorized access attempts were made from outisde. This serves as a reminder of the importance of securing Linux servers with strong authentication mechanisms and monitoring system logs for signs of intrusion attempts.</b>
  
-![Linux Syslog Auth Failures](https://i.imgur.com/QW8PF0o.png)<br>
+![linux-ssh-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/1d49f3f8-c354-4518-8bfc-b06badf7c294)
 
  <br />
  <br />
  
  - <b>This attack map showcases numerous RDP and SMB failures, illustrating the persistent attempts by potential attackers to exploit these protocols. The visualization emphasizes the need for securing remote access and file sharing services to protect against unauthorized access and potential cyber threats.</b>
  
-![Windows RDP/SMB Auth Failures](https://i.imgur.com/SETmQBl.png)<br>
+![windows-rdp-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/b7e957e4-5a57-4de0-a3db-d055e36b187a)
 
  <br />
  <br />
@@ -100,30 +99,30 @@ enabling the creation of visualizations that effectively illustrated the cyber t
 ## Metrics Before Hardening / Security Controls
 
 The following table shows the metrics we measured in our insecure environment for 24 hours:
-Start Time 2023-05-02 17:02:00 PM
-Stop Time 2023-05-03 17:02:00 PM
+Start Time 2024-04-15 14:51
+Stop Time 2024-04-16 14:52
 
 | Metric                   | Count
 | ------------------------ | -----
-| SecurityEvent (Windows VM)            | 21182
-| Syslog (Linux VM)                   | 4877
-| SecurityAlert (Microsoft Defender for Cloud            | 0
-| SecurityIncident (Sentinel Incidents)        | 343
-| NSG Inbound Malicious Flows Allowed | 969
+| SecurityEvent (Windows VM)            | 36264
+| Syslog (Linux VM)                   | 2822
+| SecurityAlert (Microsoft Defender for Cloud            | 11
+| SecurityIncident (Sentinel Incidents)        | 107
+| NSG Inbound Malicious Flows Allowed | 671
 
 
 
 ## Metrics After Hardening / Security Controls
 
 The following table shows the metrics we measured in our environment for another 24 hours, but after we have applied security controls:
-Start Time 2023-03-18 15:37
-Stop Time	2023-03-19 15:37
+Start Time 2024-04-17 14:51
+Stop Time	 2024-04-18 14:52
 
 
 | Metric                   | Count
 | ------------------------ | -----
 | SecurityEvent (Windows VM)            | 783
-| Syslog (Linux VM)                   | 23
+| Syslog (Linux VM)                   | 1
 | SecurityAlert (Microsoft Defender for Cloud            | 0
 | SecurityIncident (Sentinel Incidents)        | 0
 | NSG Inbound Malicious Flows Allowed | 0
