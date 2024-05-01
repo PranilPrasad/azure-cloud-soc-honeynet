@@ -1,47 +1,44 @@
-# Azure Honeynet: Simulating Real-World Cyber Attacks
+# Azure Honeynet: Simulating Real-World Cybersecurity Threats
 ![Sa18KAF - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/d0e0b178-c99c-4ae4-aea1-cef47d22cf26)
 
 ## Introduction
 
- I am thrilled to present my latest project, which focuses on building a honeynet in Azure to simulate real-world cyber attacks. 
-This project showcases my skills in Azure security, incident response, and environment hardening
+Welcome to my comprehensive project, where I've developed a honeynet within the Azure ecosystem to replicate authentic cyber threats. This initiative highlights my expertise in crafting secure environments, orchestrating precise incident responses, and strengthening cybersecurity defenses.
 
 ## Objective
-The main objective of this project was to [set up virtual machines that were intentionally vulnerable](https://github.com/PranilPrasad/azure-vm-prep) in the Azure infrastructure to attract and analyze cyber attacks. This helped me to better understand the tactics and techniques used by attackers, while also showcasing my ability to respond quickly and effectively to any identified issues.
+This project aimed to [establish deliberately vulnerable virtual machines](https://github.com/PranilPrasad/azure-vm-prep)  within Azure to attract and investigate cyber threats for a better understanding of attacker strategies and honing my incident response capabilities.
 
-## Technologies, Regulations, and Azure Components Employed:
+## Utilized Technologies, Standards, and Azure Services:
 
 - Azure Virtual Network (VNet)
 - Azure Network Security Group (NSG)
 - Virtual Machines (2x Windows, 1x Linux)
-- Log Analytics Workspace with Kusto Query Language (KQL) Queries
-- Azure Key Vault for Secure Secrets Management
-- Azure Storage Account for Data Storage
-- Microsoft Sentinel for Security Information and Event Management (SIEM)
-- Microsoft Defender for Cloud to Protect Cloud Resources
-- Windows Remote Desktop for Remote Access
-- Command Line Interface (CLI) for System Management
-- PowerShell for Automation and Configuration Management
-- [NIST SP 800-53 Revision 5](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final) for Security Controls
-- [NIST SP 800-61 Revision 2](https://www.nist.gov/privacy-framework/nist-sp-800-61) for Incident Handling Guidance
+- Log Analytics Workspace using Kusto Query Language (KQL)
+- Azure Key Vault for Secure Management of Secrets
+- Azure Storage Account for robust Data Storage
+- Microsoft Sentinel as a SIEM platform
+- Microsoft Defender for Cloud for comprehensive cloud security
+- Windows Remote Desktop and Command Line Interface (CLI) for remote and system management
+- PowerShell for automation and configuration
+- Security Standards: [NIST SP 800-53 Revision 5](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final) & [NIST SP 800-61 Revision 2](https://www.nist.gov/privacy-framework/nist-sp-800-61) for incident repsonse
 
 ## Methodology
 
-- <b>*Creating the honeynet*</b>: I began by [deploying multiple vulnerable virtual machines](https://github.com/PranilPrasad/azure-vm-prep) in Azure, simulating an insecure environment.
+- <b>*Establishing the Honeypot*</b>:Initial steps involved [deploying multiple vulnerable virtual machines](https://github.com/PranilPrasad/azure-vm-prep) withinin Azure, simulating an environment ready for cyber threats.
 
-- <b>*Monitoring and analysis*</b>: Azure was configured to ingest log sources from various resources into a log analytics workspace. Microsoft Sentinel was then used to build attack maps, trigger alerts, and create incidents based on the collected data.
+- <b>*Monitoring and Analysis*</b>: Configured Azure to funnel log data from various sources into a log analytics workspace, utilizing Microsoft Sentinel to construct attack visualizations, trigger alerts, and generate incident reports.
 
-- <b>*Security metrics measurement*</b>: I observed the environment for 24 hours, recording key security metrics while it was insecure. This provided a baseline to compare against after implementing remediation measures.
+- <b>*Measuring Security Metrics*</b>: Monitored the initial insecure setup for 24 hours, documenting key security indicators to establish a benchmark for subsequent security enhancements.
 
-- <b>*Incident response and remediation*</b>: After addressing the incidents and identifying vulnerabilities, I began the process of hardening the environment by applying security best practices and Azure-specific recommendations.
+- <b>*Incident Response and Remediation*</b>: Addressed identified threats and vulnerabilities, applying industry best practices and Azure-specific strategies to strengthen security measures.
 
-- <b>*Post-remediation analysis*</b>: I re-observed the environment for another 24 hours to measure security metrics again, comparing the results with the initial baseline.
+- <b>*Post-Remediation Evaluation*</b>: Re-evaluated the setup post-remediation to measure improvements in security metrics, comparing them against the initial data.
 
 
-## Architecture Prior to Implementing Hardening Measures and Security Controls
+## Architectural Overview Before and After Security Enhancements
 ![TFv2e8F - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/cebd8473-3ee8-4e88-90c0-996ff8626b7c)
 
-<b>Before Hardening Measures and Security Controls:</b>
+<b>Prior to Security Enhancement:</b>
 
 - In the "BEFORE" stage of the project, all resources were initially deployed with public exposure to the internet. This setup was intentionally insecure to attract potential cyber attackers and observe their tactics. The Virtual Machines had both their Network Security Groups (NSGs) and built-in firewalls wide open, allowing unrestricted access from any source. Additionally, all other resources, such as storage accounts and databases, were deployed with public endpoints visible to the internet, without utilizing any Private Endpoints for added security.
 
