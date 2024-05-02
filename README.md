@@ -24,7 +24,7 @@ This project aimed to [establish deliberately vulnerable virtual machines](https
 
 ## Methodology
 
-- <b>*Establishing the Honeypot*</b>:Initial steps involved [deploying multiple vulnerable virtual machines](https://github.com/PranilPrasad/azure-vm-prep) withinin Azure, simulating an environment ready for cyber threats.
+- <b>*Establishing the Honeypot*</b>: Initial steps involved [deploying multiple vulnerable virtual machines](https://github.com/PranilPrasad/azure-vm-prep) within Azure, simulating an environment ready for cyber threats.
 
 - <b>*Monitoring and Analysis*</b>: Configured Azure to funnel log data from various sources into a log analytics workspace, utilizing Microsoft Sentinel to construct attack visualizations, trigger alerts, and generate incident reports.
 
@@ -36,66 +36,49 @@ This project aimed to [establish deliberately vulnerable virtual machines](https
 
 
 ## Architectural Overview Before and After Security Enhancements
-![TFv2e8F - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/cebd8473-3ee8-4e88-90c0-996ff8626b7c)
 
 <b>Prior to Security Enhancement:</b>
 
-- In the "BEFORE" stage of the project, all resources were initially deployed with public exposure to the internet. This setup was intentionally insecure to attract potential cyber attackers and observe their tactics. The Virtual Machines had both their Network Security Groups (NSGs) and built-in firewalls wide open, allowing unrestricted access from any source. Additionally, all other resources, such as storage accounts and databases, were deployed with public endpoints visible to the internet, without utilizing any Private Endpoints for added security.
+- Originally, all resources were publicly accessible, exposing them to potential cyber threats. Virtual Machines had open Network Security Groups (NSGs) and firewalls, allowing unrestricted internet access.
 
-## Architecture After Implementing Hardening Measures and Security Controls
+![TFv2e8F - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/cebd8473-3ee8-4e88-90c0-996ff8626b7c)
+
+<b>Following Security Enhancement:</b>
+
+- Implemented stringent controls on NSGs, refined firewall configurations, and transitioned to Private Endpoints to shield Azure resources from unauthorized access.
+
 ![2OpO4dC - Imgur](https://github.com/PranilPrasad/azure-cloud-soc-honeynet/assets/126536570/91fe191f-e9f2-4047-a002-57cb07111a77)
- <b>For the "AFTER" stage, I implemented a series of hardening measures and security controls to improve the environment's overall security posture. These improvements included:</b>
 
-- <b>Network Security Groups (NSGs)</b>: I hardened the NSGs by blocking all inbound and outbound traffic, with the sole exception of my own public IP address. This ensured that only authorized traffic from a trusted source was allowed to access the virtual machines.
+ ## Attack Maps Overview
 
-- <b>Built-in Firewalls</b>: I configured the built-in firewalls on the virtual machines to restrict access and protect the resources from unauthorized connections. This step involved fine-tuning the firewall rules based on the specific requirements of each VM, thereby minimizing the potential attack surface.
+<b>Network Security Groups (NSGs) - Malicious Traffic Allowed In</b>:
 
-- <b>Private Endpoints</b>: To enhance the security of other Azure resources, I replaced the public endpoints with Private Endpoints. This ensured that access to sensitive resources, such as storage accounts and databases, was limited to the virtual network and not exposed to the public internet. As a result, these resources were protected from unauthorized access and potential attacks.
+- The first map illustrates the global distribution of malicious traffic that was allowed to enter due to initially unsecured Network Security Groups (NSGs). This visualization captures high-risk interactions, with significant concentrations appearing in North America and Europe, indicating potential hotspots for cyber attacks.
 
-By comparing the security metrics before and after implementing these hardening measures and security controls, I was able to demonstrate the effectiveness of each step in improving the overall security posture of the Azure environment.
+![nsg-malicious-allowed-in](https://github.com/cesarias/Secure_Cloud/assets/126536570/d6695c8e-b06b-4a92-a56c-a3d7a13a7adf)
 
-## Attack Maps Before Hardening / Security Controls
-<br />
+<b>Linux Virtual Machine - SSH Authentication Failures</b>: 
 
+- This map highlights SSH authentication attempts that failed, signifying brute force attacks or unauthorized access attempts on the Linux VM. The largest red bubble represents a substantial number of failed login attempts, centered in North America, a critical data point underscoring the need for stringent access controls.
+
+![linux-ssh-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/1d49f3f8-c354-4518-8bfc-b06badf7c294)
+
+<b>Windows Virtual Machine - RDP Authentication Failures</b>:
+
+- Reflecting Remote Desktop Protocol (RDP) authentication challenges, this map shows where the most significant threats were detected. The visualization indicates that while these attempts were widespread, certain regions like North America and the Middle East experienced higher frequencies, pointing to areas where additional security measures may be necessary.
+
+![windows-rdp-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/b7e957e4-5a57-4de0-a3db-d055e36b187a)
 
 > <b>NOTE: The attack maps were generated by extracting data from a workbook utilizing pre-built [KQL .JSON](https://github.com/AmiliaSalva/Cloud-SOC-Project-Resources/blob/main/MS%20Sentinel%20Maps%20(JSON)/linux-ssh-auth-fail.json) map files. These files provided a structured representation of the attack patterns and their associated data, 
 enabling the creation of visualizations that effectively illustrated the cyber threats and their impact on the system.</b>
 
 
- <br />
- <br />
- 
-- <b>This attack map demonstrates the consequences of leaving the Network Security Group (NSG) open, as it allowed for malicious traffic to flow unimpeded. This visualization underscores the importance of implementing proper security measures, such as restricting NSG rules, to prevent unauthorized access and minimize potential threats.</b>
+## Analysis and Interpretation
+<b>Pre-Hardening Insights</b>:
 
-![nsg-malicious-allowed-in](https://github.com/cesarias/Secure_Cloud/assets/126536570/d6695c8e-b06b-4a92-a56c-a3d7a13a7adf)
+- Before implementing security controls, the maps provide a stark visual of the network's vulnerabilities, with widespread unauthorized access attempts across all services. These insights validate the initial hypothesis of the honeynet's attractiveness to threat actors and emphasize the critical need for improved security measures.
 
- <br />
- <br />
- 
- - <b>This attack map highlights the numerous syslog authentication failures experienced by the Linux server I deployed, indicating that unauthorized access attempts were made from outisde. This serves as a reminder of the importance of securing Linux servers with strong authentication mechanisms and monitoring system logs for signs of intrusion attempts.</b>
- 
-![linux-ssh-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/1d49f3f8-c354-4518-8bfc-b06badf7c294)
-
- <br />
- <br />
- 
- - <b>This attack map showcases numerous RDP and SMB failures, illustrating the persistent attempts by potential attackers to exploit these protocols. The visualization emphasizes the need for securing remote access and file sharing services to protect against unauthorized access and potential cyber threats.</b>
- 
-![windows-rdp-auth-fail](https://github.com/cesarias/Secure_Cloud/assets/126536570/b7e957e4-5a57-4de0-a3db-d055e36b187a)
-
- <br />
- <br />
-
-## Attack Maps After Hardening / Security Controls
-
-> All map queries actually returned no results due to no instances of malicious activity for the 24 hour period after hardening.
-
- <br />
- <br />
- 
-## Metrics Before Hardening / Security Controls
-
-The following table shows the metrics we measured in our insecure environment for 24 hours:
+- The following table shows the metrics we measured in our insecure environment for 24 hours:
 Start Time 2024-04-15 14:51
 Stop Time 2024-04-16 14:52
 
@@ -108,10 +91,11 @@ Stop Time 2024-04-16 14:52
 | NSG Inbound Malicious Flows Allowed | 671
 
 
+ <b>Post-Hardening Impact</b>:
 
-## Metrics After Hardening / Security Controls
+ - After enhancing security protocols, subsequent monitoring showed a stark reduction in such incidents, proving the effectiveness of the hardening strategies implemented.
 
-The following table shows the metrics we measured in our environment for another 24 hours, but after we have applied security controls:
+- The following table shows the metrics we measured in our environment for another 24 hours, but after we have applied security controls:
 Start Time 2024-04-17 14:51
 Stop Time	 2024-04-18 14:52
 
@@ -126,7 +110,6 @@ Stop Time	 2024-04-18 14:52
 
 ## Conclusion
 
-In conclusion, I set up a compact, but effective honeynet using Microsoft Azure's robust cloud infrastructure. Microsoft Sentinel was then utilized to trigger alerts and generate incidents based on the logs ingested from the implemented watch lists. Baseline metrics were recorded in the unprotected environment before the implementation of any security controls. Following this, a range of security measures were enforced to fortify the network against potential threats. Upon implementation of these controls, another set of measurements was taken.
+The project successfully demonstrated how a targeted honeynet setup within Microsoft Azure could be used to simulate, detect, and respond to real-world cyber threats. The results emphatically showed how tailored security enhancements substantially mitigate potential cyber risks.
 
-The comparison of pre- and post-implementation metrics demonstrated a significant reduction in security events and incidents, which highlights the effectiveness of the enforced security controls.
-It's important to mention that if the network's resources were extensively engaged by regular users, it's plausible that a higher number of security events and alerts could have been produced within the 24-hour timeframe post-security control implementation.
+This project not only validates the effectiveness of strategic security implementations but also underscores the dynamic capabilities of Azure in managing and responding to cybersecurity challenges
